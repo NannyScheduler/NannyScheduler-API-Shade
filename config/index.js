@@ -12,5 +12,5 @@ module.exports = {
     // "https://cookies.ladrillo.now.sh",
     // "http://localhost:3000"
   ],
-  secure: isProduction // cookie sent over http only in dev
+  secure: isProduction
 };
