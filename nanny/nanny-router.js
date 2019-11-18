@@ -1,11 +1,10 @@
 const express = require("express");
 
 const Nannies = require("./nanny-model.js");
-// const db = require("../database/db-config");
-
+const restricted = require("../auth/restricted-middleware");
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", restricted, (req, res) => {
   Nannies.findAllNannies()
     .then(nanny => {
       res.json(nanny);
@@ -17,7 +16,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Nannies.findNannyById(id)
@@ -35,7 +34,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   const nannyData = req.body;
 
   Nannies.addNanny(nannyData)
@@ -47,7 +46,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", restricted, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
@@ -66,7 +65,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Nannies.removeNanny(id)
