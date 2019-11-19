@@ -75,7 +75,7 @@ Ensure you send these fields in this format when posting:
 
 Ensure you send the correct email and password
 
--To edit or update nanny details, PUT hhttps://nanny-scheduler1.herokuapp.com/api/nanny/${id}
+-To edit or update nanny details, PUT https://nanny-scheduler1.herokuapp.com/api/nanny/${id}
 
 -To delete nanny details, DELETE https://nanny-scheduler1.herokuapp.com/api/nanny/${id}
 
