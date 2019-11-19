@@ -17,10 +17,19 @@ function findNannyBy(filter) {
   return db("nannies").where(filter);
 }
 
-async function addNanny(nanny) {
-  const [id] = await db("nannies").insert(nanny);
+// async function addNanny(nanny) {
+//   const [id] = await db("nannies").insert(nanny);
 
-  return findNannyById(id);
+//   return findNannyById(id);
+// }
+
+function addNanny(nanny) {
+  return db("nannies")
+    .insert(nanny, "id")
+    .then(ids => {
+      const [id] = ids;
+      return findNannyById(id);
+    });
 }
 
 function findNannyById(id) {

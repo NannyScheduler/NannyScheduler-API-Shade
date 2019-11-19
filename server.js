@@ -5,7 +5,9 @@ const session = require("express-session");
 const KnexSessionStore = require("connect-session-knex")(session);
 
 const authRouter = require("./auth/auth-router.js");
+const userRouter = require("./users/user-router");
 const nannyRouter = require("./nanny/nanny-router.js");
+const parentRouter = require("./parents/parent-router.js");
 
 const server = express();
 
@@ -34,7 +36,9 @@ server.use(cors());
 server.use(session(sessionConfig));
 
 server.use("/api/auth", authRouter);
+server.use("/api/users", userRouter);
 server.use("/api/nanny", nannyRouter);
+server.use("/api/parent", parentRouter);
 
 server.get("/", (req, res) => {
   res.status(200).json({ api: "up" });

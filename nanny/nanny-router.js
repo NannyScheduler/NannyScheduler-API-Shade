@@ -1,10 +1,59 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 
 const Nannies = require("./nanny-model.js");
 const restricted = require("../auth/restricted-middleware");
 const router = express.Router();
 
-router.get("/", restricted, (req, res) => {
+router.get("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.json("you can not leave, actually");
+      } else {
+        res.json("goodbye, sad to see you go");
+      }
+    });
+  } else {
+    res.end();
+  }
+});
+
+router.post("/register", (req, res) => {
+  let user = req.body;
+  const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
+  user.password = hash;
+
+  Nannies.addNanny(user)
+    .then(saved => {
+      res.status(201).json(saved);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+router.post("/login", (req, res) => {
+  let { username, password } = req.body;
+
+  Nannies.findNannyBy({ username })
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) {
+        req.session.user = user;
+        res.status(200).json({
+          message: `Welcome ${user.username}!`
+        });
+      } else {
+        res.status(401).json({ message: "Invalid Credentials" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+router.get("/", (req, res) => {
   Nannies.findAllNannies()
     .then(nanny => {
       res.json(nanny);
@@ -34,17 +83,17 @@ router.get("/:id", restricted, (req, res) => {
     });
 });
 
-router.post("/", restricted, (req, res) => {
-  const nannyData = req.body;
+// router.post("/", restricted, (req, res) => {
+//   const nannyData = req.body;
 
-  Nannies.addNanny(nannyData)
-    .then(nanny => {
-      res.status(201).json(nanny);
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to create new nanny" });
-    });
-});
+//   Nannies.addNanny(nannyData)
+//     .then(nanny => {
+//       res.status(201).json(nanny);
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to create new nanny" });
+//     });
+// });
 
 router.put("/:id", restricted, (req, res) => {
   const { id } = req.params;
@@ -80,4 +129,5 @@ router.delete("/:id", restricted, (req, res) => {
       res.status(500).json({ message: "Failed to delete nanny" });
     });
 });
+
 module.exports = router;
