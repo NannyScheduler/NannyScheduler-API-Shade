@@ -8,7 +8,8 @@ exports.seed = function(knex) {
         {
           parent_id: 1,
           nanny_id: 2,
-          children_id: 1
+          children_id: 1,
+          special_notes: "Kindly know that we have a pet at home"
         },
         {
           parent_id: 2,

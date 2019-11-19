@@ -39,6 +39,7 @@ exports.up = function(knex) {
         .string("email", 128)
         .unique()
         .notNullable();
+
       tbl.string("first_name", 128).notNullable();
       tbl.string("last_name", 128).notNullable();
       tbl.string("address", 128).notNullable();
@@ -97,6 +98,7 @@ exports.up = function(knex) {
         .notNullable()
         .references("id")
         .inTable("children");
+      tbl.string("special_notes", 256);
     });
 };
 
