@@ -2,9 +2,11 @@ This document provides guidelines and examples for the Nanny Scheduler API endpo
 
 **_GENERAL GUIDELINES_**
 
+BaseEndpoint URL: https://nanny-scheduler1.herokuapp.com
+
 Restful APIs for Nanny users
 
-- Get a list of all the nannies - GET http://localhost:5500/api/nanny/
+- Get a list of all the nannies - GET https://nanny-scheduler1.herokuapp.com/api/nanny/
   Example of response
 
 ```json
@@ -36,7 +38,7 @@ Restful APIs for Nanny users
 ]
 ```
 
--Get a single nanny by Id GET http://localhost:5500/api/nanny/{id}
+-Get a single nanny by Id GET https://nanny-scheduler1.herokuapp.com/api/nanny/{id}
 Example of response:
 
 ```json
@@ -54,7 +56,7 @@ Example of response:
 }
 ```
 
--To create a new nanny/register or sign up, we need to POST http://localhost:5500/api/nanny/register
+-To create a new nanny/register or sign up, we need to POST https://nanny-scheduler1.herokuapp.com/api/nanny/register
 Ensure you send these fields in this format when posting:
 
 ```json{
@@ -69,17 +71,17 @@ Ensure you send these fields in this format when posting:
 }
 ```
 
--To login, we need to POST http://localhost:5500/api/nanny/login
+-To login, we need to POST https://nanny-scheduler1.herokuapp.com/api/nanny/login
 
 Ensure you send the correct email and password
 
--To edit or update nanny details, PUT http://localhost:5500/api/nanny/${id}
+-To edit or update nanny details, PUT hhttps://nanny-scheduler1.herokuapp.com/api/nanny/${id}
 
--To delete nanny details, DELETE http://localhost:5500/api/nanny/${id}
+-To delete nanny details, DELETE https://nanny-scheduler1.herokuapp.com/api/nanny/${id}
 
 Restful APIs for Parent users
 
-- Get a list of all the parents - GET http://localhost:5500/api/parent/
+- Get a list of all the parents - GET https://nanny-scheduler1.herokuapp.com/api/parent/
   Example of response
 
 ```json
@@ -105,7 +107,7 @@ Restful APIs for Parent users
 ]
 ```
 
--Get a single parent by Id GET http://localhost:5500/api/parent/{id}
+-Get a single parent by Id GET https://nanny-scheduler1.herokuapp.com/api/parent/{id}
 Example of response:
 
 ```json
@@ -120,7 +122,7 @@ Example of response:
 }
 ```
 
--To create a new parent/register or sign up, we need to POST http://localhost:5500/api/parent/register
+-To create a new parent/register or sign up, we need to POST https://nanny-scheduler1.herokuapp.com/api/parent/register
 Ensure you send these fields in this format when posting:
 
 ```json{
@@ -133,10 +135,10 @@ Ensure you send these fields in this format when posting:
 }
 ```
 
--To login, we need to POST http://localhost:5500/api/parent/login
+-To login, we need to POST https://nanny-scheduler1.herokuapp.com/api/parent/login
 
 Ensure you send the correct email and password
 
--To edit or update parent details, PUT http://localhost:5500/api/parent/${id}
+-To edit or update parent details, PUT https://nanny-scheduler1.herokuapp.com/api/parent/${id}
 
--To delete parent details, DELETE http://localhost:5500/api/parent/${id}
+-To delete parent details, DELETE https://nanny-scheduler1.herokuapp.com/api/parent/${id}
