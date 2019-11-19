@@ -10,7 +10,7 @@ module.exports = {
     // "https://cookies-git-master.ladrillo.now.sh",
     // "https://cookies-liart-five.now.sh",
     // "https://cookies.ladrillo.now.sh",
-    // "http://localhost:3000"
+    "http://localhost:3000"
   ],
   secure: isProduction
 };

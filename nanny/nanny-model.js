@@ -30,7 +30,7 @@ function findNannyById(id) {
 }
 
 function updateNanny(changes, id) {
-  return db("users")
+  return db("nannies")
     .where({ id })
     .update(changes);
 }
