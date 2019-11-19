@@ -18,7 +18,7 @@ function findParentBy(filter) {
 }
 
 async function addParent(parent) {
-  const [id] = await db("parents").insert(parent);
+  const [id] = await db("parents").insert(parent, "id");
 
   return findParentbyId(id);
 }

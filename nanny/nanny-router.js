@@ -110,7 +110,7 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/", restricted, (req, res) => {
+router.get("/", (req, res) => {
   Nannies.findAllNannies()
     .then(nannies => {
       const formattedNannies = nannies.map(nanny => ({
