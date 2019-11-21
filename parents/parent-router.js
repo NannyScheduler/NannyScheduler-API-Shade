@@ -90,7 +90,7 @@ router.post("/login", (req, res) => {
           message: `Welcome ${user.first_name}!`
         });
       } else {
-        res.status(401).json({ message: "Invalid Credentials" });
+        res.status(401).json({ message: "You must have a valid email and password" });
       }
     })
     .catch(error => {
