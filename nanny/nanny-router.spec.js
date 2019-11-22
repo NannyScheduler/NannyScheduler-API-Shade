@@ -9,7 +9,7 @@ beforeEach(async () => {
 });
 
 describe("nanny router", () => {
-  describe("[POST] /register endpoint", () => {
+  xdescribe("[POST] /register endpoint", () => {
     test("the db env is testing", () => {
       expect(process.env.DB_ENV).toBe("testing");
     });
@@ -50,18 +50,26 @@ describe("POST /nanny", function() {
     can_drive: "true",
     phone: "+2335690211"
   };
-  it("respond with 201 created", function(done) {
+  it("respond with 201 created",  function(done) {
     request(server)
-      .post("/api/nanny/register")
-      .send(data)
+      .get("/api/nanny/")
+    //   .post("/api/nanny/register")
+      .set("Accept", "application/json")
+    //   .send(data)
+      .expect(201)
+      .end(function(err, res) {
+        if (err) return done(err);
+        done();
+      });
      
+    //   done()
   });
 });
 
-describe("login router", () => {
+xdescribe("login router", () => {
   describe("[POST] /login endpoint", () => {
     test("the db env is testing", () => {
-      expect(process.env.DB_ENV).toBe("testing");
+      expect(process.env.DB_ENV).toEqual("testing");
     });
 
     it("responds with json", function(done) {
@@ -79,7 +87,7 @@ describe("login router", () => {
   });
 });
 
-describe("[GET] / endpoint", () => {
+xdescribe("[GET] / endpoint", () => {
   it("should return status 200 OK", async () => {
     const response = await request(server).get("/api/nanny");
     expect(response.status).toBe(200);
@@ -94,7 +102,7 @@ describe("[GET] / endpoint", () => {
   });
 });
 
-describe("[GET] /nanny/:id", function() {
+xdescribe("[GET] /nanny/:id", function() {
   it("respond with json containing a single nanny", function(done) {
     let nanny_id = 1;
     request(server)
@@ -105,7 +113,7 @@ describe("[GET] /nanny/:id", function() {
   });
 });
 
-describe("put router", () => {
+xdescribe("put router", () => {
   it("should edit nanny details", function(done) {
     request(server)
       .put("/api/nanny/4")
@@ -121,7 +129,7 @@ describe("put router", () => {
   });
 });
 
-describe("delete router", () => {
+xdescribe("delete router", () => {
   it("should delete nanny details", function(done) {
     request(server)
       .delete("/api/nanny/4")

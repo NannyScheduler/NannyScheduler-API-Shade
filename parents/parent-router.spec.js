@@ -8,7 +8,7 @@ beforeEach(async () => {
   await db("parents").truncate();
 });
 
-describe("parent router", () => {
+xdescribe("parent router", () => {
   describe("[POST] /register endpoint", () => {
     test("the db env is testing", () => {
       expect(process.env.DB_ENV).toBe("testing");
@@ -37,7 +37,7 @@ describe("parent router", () => {
   });
 });
 
-describe("login router", () => {
+xdescribe("login router", () => {
   describe("[POST] /login endpoint", () => {
     test("the db env is testing", () => {
       expect(process.env.DB_ENV).toBe("testing");
@@ -58,7 +58,7 @@ describe("login router", () => {
   });
 });
 
-describe("[GET] / endpoint", () => {
+xdescribe("[GET] / endpoint", () => {
   it("should return status 200 OK", async () => {
     const response = await request(server).get("/api/parent");
     expect(response.status).toBe(200);

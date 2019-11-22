@@ -45,7 +45,7 @@ router.post("/register", registerUser, (req, res) => {
   // The goal is to find the id of the user we just added (in registerUser)
   // Using the user's email, we'll go find the id of the user
   const findUserByEmail = Users.findUserBy({ email: req.body.email }).first();
-
+    console.log("hit the endpoint")
   // Once we find the user, we'll grab the id from the .then function
   findUserByEmail.then(foundUser => {
     // get the id from the found user
@@ -113,6 +113,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/", restricted, (req, res) => {
+    console.log("Hit endpoint")
   Nannies.findAllNannies()
     .then(nannies => {
       const formattedNannies = nannies.map(nanny => ({
