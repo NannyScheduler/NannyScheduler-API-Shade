@@ -5,11 +5,27 @@ const db = require("../database/db-config");
 const server = require("../server");
 
 beforeEach(async () => {
-  await db("nannies").truncate();
+  // await db("nannies").truncate();
+  console.log("Before function");
+  await db.migrate.rollback();
+  await db.migrate.latest();
 });
 
+// beforeEach(function(done) {
+//   db.migrate.rollback().then(function() {
+//     db.migrate.latest().then(function() {
+//       // return knex.seed.run().then(function() {
+//       done();
+//       // });
+//     });
+//   });
+// });
+
+// afterEach(async () => {
+//   await db.migrate.rollback();
+// });
 describe("nanny router", () => {
-  xdescribe("[POST] /register endpoint", () => {
+  describe("[POST] /register endpoint", () => {
     test("the db env is testing", () => {
       expect(process.env.DB_ENV).toBe("testing");
     });
@@ -50,23 +66,23 @@ describe("POST /nanny", function() {
     can_drive: "true",
     phone: "+2335690211"
   };
-  it("respond with 201 created",  function(done) {
+  it("respond with 201 created", function(done) {
     request(server)
-      .get("/api/nanny/")
-    //   .post("/api/nanny/register")
+      // .get("/api/nanny/")
+      .post("/api/nanny/register")
       .set("Accept", "application/json")
-    //   .send(data)
+      .send(data)
       .expect(201)
       .end(function(err, res) {
         if (err) return done(err);
         done();
       });
-     
+
     //   done()
   });
 });
 
-xdescribe("login router", () => {
+describe("login router", () => {
   describe("[POST] /login endpoint", () => {
     test("the db env is testing", () => {
       expect(process.env.DB_ENV).toEqual("testing");
@@ -87,7 +103,7 @@ xdescribe("login router", () => {
   });
 });
 
-xdescribe("[GET] / endpoint", () => {
+describe("[GET] / endpoint", () => {
   it("should return status 200 OK", async () => {
     const response = await request(server).get("/api/nanny");
     expect(response.status).toBe(200);
@@ -102,7 +118,7 @@ xdescribe("[GET] / endpoint", () => {
   });
 });
 
-xdescribe("[GET] /nanny/:id", function() {
+describe("[GET] /nanny/:id", function() {
   it("respond with json containing a single nanny", function(done) {
     let nanny_id = 1;
     request(server)
@@ -113,7 +129,7 @@ xdescribe("[GET] /nanny/:id", function() {
   });
 });
 
-xdescribe("put router", () => {
+describe("put router", () => {
   it("should edit nanny details", function(done) {
     request(server)
       .put("/api/nanny/4")
@@ -122,14 +138,14 @@ xdescribe("put router", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .end(function(err, res) {
-        res.body.first_name.toBe("cece");
+        res.body.first_name.toEqual("cece");
         if (err) return done(err);
         done();
       });
   });
 });
 
-xdescribe("delete router", () => {
+describe("delete router", () => {
   it("should delete nanny details", function(done) {
     request(server)
       .delete("/api/nanny/4")

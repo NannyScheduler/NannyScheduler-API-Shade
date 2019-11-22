@@ -5,8 +5,12 @@ const db = require("../database/db-config");
 const server = require("../server");
 
 beforeEach(async () => {
-  await db("parents").truncate();
+  // await db("nannies").truncate();
+  // console.log("Before function");
+  // await db.migrate.rollback();
+  // await db.migrate.latest();
 });
+
 
 xdescribe("parent router", () => {
   describe("[POST] /register endpoint", () => {
