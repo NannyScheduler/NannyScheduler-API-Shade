@@ -90,7 +90,7 @@ router.post("/login", (req, res) => {
           message: `Welcome ${user.first_name}!`
         });
       } else {
-        res.status(401).json({ message: "Invalid Credentials" });
+        res.status(401).json({ message: "You must have a valid email and password" });
       }
     })
     .catch(error => {
@@ -136,7 +136,7 @@ router.put("/:id", restricted, (req, res) => {
     .then(parent => {
       if (parent) {
         Parents.updateParent(changes, id).then(updatedParent => {
-          res.json({ message: "Successfully updated details" });
+          res.json({ message: "Successfully updated parents details" });
         });
       } else {
         res

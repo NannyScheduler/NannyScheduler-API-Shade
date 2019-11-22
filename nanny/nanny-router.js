@@ -45,7 +45,7 @@ router.post("/register", registerUser, (req, res) => {
   // The goal is to find the id of the user we just added (in registerUser)
   // Using the user's email, we'll go find the id of the user
   const findUserByEmail = Users.findUserBy({ email: req.body.email }).first();
-
+    console.log("hit the endpoint")
   // Once we find the user, we'll grab the id from the .then function
   findUserByEmail.then(foundUser => {
     // get the id from the found user
@@ -102,7 +102,9 @@ router.post("/login", (req, res) => {
           message: `Welcome ${user.first_name}!`
         });
       } else {
-        res.status(401).json({ message: "Invalid Credentials" });
+        res
+          .status(401)
+          .json({ message: "ou must have a valid email and password" });
       }
     })
     .catch(error => {
@@ -110,7 +112,8 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/", (req, res) => {
+router.get("/", restricted, (req, res) => {
+    console.log("Hit endpoint")
   Nannies.findAllNannies()
     .then(nannies => {
       const formattedNannies = nannies.map(nanny => ({
@@ -152,7 +155,7 @@ router.put("/:id", restricted, (req, res) => {
     .then(nanny => {
       if (nanny) {
         Nannies.updateNanny(changes, id).then(updatedNanny => {
-          res.json({ message: "Successfully updated details" });
+          res.json({ message: "Successfully updated nanny details" });
         });
       } else {
         res.status(404).json({ message: "Could not find nanny with given id" });
@@ -169,7 +172,7 @@ router.delete("/:id", restricted, (req, res) => {
   Nannies.removeNanny(id)
     .then(deleted => {
       if (deleted) {
-        res.json({ message: "Successfully deleted" });
+        res.json({ message: "Successfully deleted nanny details" });
       } else {
         res.status(404).json({ message: "Could not find nanny with given id" });
       }
